@@ -3,22 +3,34 @@
   "name": "AKSIS → موادي",
   "version": "1.0",
   "description": "استيراد الجدول والدرجات والرسائل من AKSIS إلى تطبيق موادي",
-  "permissions": ["activeTab", "scripting", "storage"],
+  "permissions": ["activeTab", "scripting", "storage", "tabs"],
   "host_permissions": [
-    "https://aksis.istanbul.edu.tr/*"
+    "https://aksis.istanbul.edu.tr/*",
+    "http://aksis.istanbul.edu.tr/*",
+    "https://aos.istanbul.edu.tr/*",
+    "http://aos.istanbul.edu.tr/*",
+    "https://*.istanbul.edu.tr/*"
   ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
-      "48": "icon.png"
+      "16": "icon.png",
+      "48": "icon.png",
+      "128": "icon.png"
     }
   },
   "icons": {
-    "48": "icon.png"
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
   },
   "content_scripts": [
     {
-      "matches": ["https://aksis.istanbul.edu.tr/*"],
+      "matches": [
+        "https://aksis.istanbul.edu.tr/*",
+        "https://aos.istanbul.edu.tr/*",
+        "https://*.istanbul.edu.tr/*"
+      ],
       "js": ["content.js"],
       "run_at": "document_idle"
     }
