@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AKSIS → موادي</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{
+  font-family:Cairo,sans-serif;
+  background:#111114;color:#e6e1e5;
+  width:360px;min-height:480px;
+}
+
+/* Header */
+.header{
+  background:linear-gradient(135deg,#d0bcff22,#9a82db22);
+  border-bottom:1px solid rgba(202,196,208,0.12);
+  padding:16px;display:flex;align-items:center;gap:12px;
+}
+.logo{
+  width:40px;height:40px;border-radius:12px;
+  background:linear-gradient(135deg,#d0bcff,#9a82db);
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;flex-shrink:0;
+}
+.header-text h1{font-size:16px;font-weight:900;color:#e6e1e5}
+.header-text p{font-size:11px;color:#938f99;margin-top:2px}
+
+/* Status bar */
+.status-bar{
+  padding:10px 16px;
+  background:#1e1d22;
+  border-bottom:1px solid rgba(202,196,208,0.08);
+  display:flex;align-items:center;gap:8px;font-size:12px;
+}
+.status-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.status-dot.green{background:#a8d5a2;box-shadow:0 0 6px #a8d5a2}
+.status-dot.red{background:#f2b8b5;box-shadow:0 0 6px #f2b8b5}
+.status-dot.yellow{background:#f4e16c;box-shadow:0 0 6px #f4e16c;animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.4}}
+
+/* Tabs */
+.tabs{display:flex;padding:12px 16px 0;gap:6px}
+.tab{
+  flex:1;padding:8px 4px;border:none;border-radius:10px 10px 0 0;
+  background:#1e1d22;color:#938f99;font-family:Cairo,sans-serif;
+  font-size:12px;font-weight:600;cursor:pointer;
+  border-bottom:2px solid transparent;transition:all 0.2s;
+}
+.tab.active{background:#2d2b33;color:#d0bcff;border-bottom-color:#d0bcff}
+.tab:hover:not(.active){background:#2d2b33;color:#cac4d0}
+
+/* Content */
+.content{padding:12px 16px 16px;background:#2d2b33;margin:0 16px;border-radius:0 0 14px 14px;min-height:200px}
+
+/* Buttons */
+.btn{
+  width:100%;padding:12px;border:none;border-radius:12px;
+  font-family:Cairo,sans-serif;font-size:14px;font-weight:700;
+  cursor:pointer;transition:all 0.2s;margin-bottom:8px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.btn-primary{
+  background:linear-gradient(135deg,#d0bcff,#9a82db);
+  color:#1c1b1f;
+}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(208,188,255,0.3)}
+.btn-primary:active{transform:translateY(0)}
+.btn-secondary{
+  background:#1e1d22;color:#cac4d0;
+  border:1px solid rgba(202,196,208,0.12);
+}
+.btn-secondary:hover{background:#38363d;color:#e6e1e5}
+.btn-danger{background:#3d1f1f;color:#f2b8b5;border:1px solid rgba(242,184,181,0.2)}
+.btn-danger:hover{background:#5a2a2a}
+.btn:disabled{opacity:0.4;cursor:not-allowed;transform:none!important}
+
+/* Cards */
+.card{
+  background:#1e1d22;border-radius:12px;padding:12px;
+  border:1px solid rgba(202,196,208,0.08);margin-bottom:8px;
+}
+.card-title{font-size:12px;font-weight:700;color:#d0bcff;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.card-item{
+  padding:8px 10px;background:#2d2b33;border-radius:8px;
+  margin-bottom:6px;font-size:12px;border:1px solid rgba(202,196,208,0.06);
+}
+.card-item:last-child{margin-bottom:0}
+.item-name{color:#e6e1e5;font-weight:600;margin-bottom:3px}
+.item-sub{color:#938f99;font-size:11px;display:flex;gap:8px;flex-wrap:wrap}
+.item-sub span{display:flex;align-items:center;gap:3px}
+.badge{
+  display:inline-block;padding:2px 8px;border-radius:20px;
+  font-size:10px;font-weight:700;
+}
+.badge-green{background:#1a3d20;color:#a8d5a2}
+.badge-red{background:#3d1f1f;color:#f2b8b5}
+.badge-yellow{background:#3d3210;color:#f4e16c}
+.badge-purple{background:#2d1f4a;color:#d0bcff}
+
+/* Instructions */
+.steps{padding:4px 0}
+.step{
+  display:flex;gap:10px;align-items:flex-start;
+  padding:10px 0;border-bottom:1px solid rgba(202,196,208,0.06);
+}
+.step:last-child{border-bottom:none}
+.step-num{
+  width:24px;height:24px;border-radius:50%;
+  background:linear-gradient(135deg,#d0bcff,#9a82db);
+  color:#1c1b1f;font-size:11px;font-weight:900;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.step-text{font-size:12px;color:#cac4d0;line-height:1.6}
+.step-text strong{color:#d0bcff}
+
+/* Empty */
+.empty{text-align:center;padding:30px 16px;color:#938f99}
+.empty-icon{font-size:40px;margin-bottom:8px}
+.empty p{font-size:12px;line-height:1.7}
+
+/* Loading */
+.loading{text-align:center;padding:24px;color:#938f99;font-size:12px}
+.spinner{
+  width:28px;height:28px;border:3px solid rgba(208,188,255,0.2);
+  border-top-color:#d0bcff;border-radius:50%;
+  animation:spin 0.8s linear infinite;margin:0 auto 10px;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Success toast */
+.toast{
+  position:fixed;top:12px;left:50%;transform:translateX(-50%);
+  background:#a8d5a2;color:#1a3d20;padding:8px 16px;border-radius:20px;
+  font-size:12px;font-weight:700;font-family:Cairo,sans-serif;
+  z-index:9999;opacity:0;transition:opacity 0.3s;pointer-events:none;
+  white-space:nowrap;
+}
+.toast.show{opacity:1}
+
+/* إعدادات */
+.setting-row{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 0;border-bottom:1px solid rgba(202,196,208,0.06);
+}
+.setting-row:last-child{border-bottom:none}
+.setting-label{font-size:12px;color:#cac4d0}
+.setting-sub{font-size:10px;color:#938f99;margin-top:2px}
+.toggle{
+  width:40px;height:22px;border-radius:11px;background:#38363d;
+  border:none;cursor:pointer;position:relative;transition:background 0.2s;flex-shrink:0;
+}
+.toggle.on{background:#9a82db}
+.toggle::after{
+  content:'';position:absolute;top:3px;right:3px;
+  width:16px;height:16px;border-radius:50%;background:#fff;
+  transition:transform 0.2s;
+}
+.toggle.on::after{transform:translateX(-18px)}
+
+.url-input{
+  width:100%;padding:8px 10px;border-radius:8px;
+  background:#111114;border:1px solid rgba(202,196,208,0.12);
+  color:#e6e1e5;font-family:Cairo,sans-serif;font-size:11px;
+  margin-top:6px;direction:ltr;
+}
+.url-input:focus{outline:none;border-color:#d0bcff}
+
+/* Data count chips */
+.data-chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{
+  padding:4px 10px;border-radius:20px;font-size:11px;font-weight:700;
+  background:#2d2b33;color:#cac4d0;border:1px solid rgba(202,196,208,0.1);
+  display:flex;align-items:center;gap:4px;
+}
+.chip.has-data{background:#2d1f4a;color:#d0bcff;border-color:rgba(208,188,255,0.2)}
+
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="logo">📚</div>
+  <div class="header-text">
+    <h1>AKSIS → موادي</h1>
+    <p>استيراد بياناتك الجامعية تلقائياً</p>
+  </div>
+</div>
+
+<div class="status-bar" id="statusBar">
+  <div class="status-dot yellow" id="statusDot"></div>
+  <span id="statusText">جاري التحقق من الصفحة...</span>
+</div>
+
+<div style="padding:12px 16px 0">
+  <div class="tabs">
+    <button class="tab active" onclick="switchTab('scrape')">🔄 استيراد</button>
+    <button class="tab" onclick="switchTab('data')">📊 البيانات</button>
+    <button class="tab" onclick="switchTab('settings')">⚙️ إعدادات</button>
+  </div>
+</div>
+
+<!-- TAB: استيراد -->
+<div class="content" id="tab-scrape">
+  <div id="scrape-content">
+    <div class="empty">
+      <div class="empty-icon">🏛️</div>
+      <p>افتح صفحة AKSIS أولاً<br>ثم اضغط زر الاستيراد</p>
+    </div>
+  </div>
+
+  <div style="margin-top:12px">
+    <button class="btn btn-primary" id="btnScrape" onclick="doScrape()">
+      <span>🔄</span> استيراد من الصفحة الحالية
+    </button>
+    <button class="btn btn-secondary" onclick="openAksis()">
+      <span>🌐</span> فتح AKSIS
+    </button>
+  </div>
+</div>
+
+<!-- TAB: البيانات -->
+<div class="content" id="tab-data" style="display:none">
+  <div id="data-content">
+    <div class="empty">
+      <div class="empty-icon">📭</div>
+      <p>لا توجد بيانات محفوظة بعد<br>اذهب لتبويب "استيراد" أولاً</p>
+    </div>
+  </div>
+</div>
+
+<!-- TAB: إعدادات -->
+<div class="content" id="tab-settings" style="display:none">
+  <div class="setting-row">
+    <div>
+      <div class="setting-label">رابط تطبيق موادي</div>
+      <div class="setting-sub">الرابط الذي تفتح منه تطبيقك</div>
+      <input class="url-input" id="appUrl" type="url" placeholder="https://..." />
+    </div>
+  </div>
+  <div class="setting-row">
+    <div>
+      <div class="setting-label">مسح جميع البيانات</div>
+      <div class="setting-sub">حذف الجدول والدرجات والرسائل المحفوظة</div>
+    </div>
+    <button class="btn btn-danger" style="width:auto;padding:6px 12px;margin:0;font-size:11px" onclick="clearAll()">مسح</button>
+  </div>
+  <div style="margin-top:12px">
+    <button class="btn btn-secondary" onclick="saveSettings()">💾 حفظ الإعدادات</button>
+  </div>
+  <div style="margin-top:16px;padding:10px;background:#1e1d22;border-radius:10px">
+    <div style="font-size:10px;color:#938f99;line-height:1.8">
+      <strong style="color:#d0bcff">كيف يعمل؟</strong><br>
+      ١. افتح AKSIS وسجّل دخولك<br>
+      ٢. اذهب لصفحة Ders Programı واضغط استيراد<br>
+      ٣. اذهب لصفحة Sınav Sonuçları واضغط استيراد<br>
+      ٤. اذهب لصفحة Yazışma Listesi واضغط استيراد<br>
+      ٥. افتح تطبيق موادي وستجد بياناتك جاهزة ✅
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+let savedData = { schedule: [], grades: [], messages: [] };
+let settings = { appUrl: '' };
+
+// ===== INIT =====
+async function init() {
+  // تحميل البيانات المحفوظة
+  const stored = await chrome.storage.local.get(['aksisData', 'aksisSettings']);
+  if (stored.aksisData) savedData = stored.aksisData;
+  if (stored.aksisSettings) {
+    settings = stored.aksisSettings;
+    document.getElementById('appUrl').value = settings.appUrl || '';
+  }
+  checkCurrentPage();
+  renderDataTab();
+}
+
+// ===== فحص الصفحة الحالية =====
+async function checkCurrentPage() {
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const url = tab?.url || '';
+    const dot = document.getElementById('statusDot');
+    const txt = document.getElementById('statusText');
+    const btn = document.getElementById('btnScrape');
+    const scrapeContent = document.getElementById('scrape-content');
+
+    if (url.includes('aksis.istanbul.edu.tr')) {
+      dot.className = 'status-dot green';
+      let pageType = 'الصفحة الرئيسية';
+      let icon = '🏛️';
+      let hint = '';
+
+      if (url.includes('DersProgrami') || tab.title?.includes('Ders')) {
+        pageType = 'جدول الدروس - Ders Programı';
+        icon = '📅';
+        hint = 'سيتم استيراد مواد جدولك الدراسي';
+      } else if (url.includes('SinavSonuc') || tab.title?.includes('Sınav')) {
+        pageType = 'نتائج الاختبارات - Sınav Sonuçları';
+        icon = '📊';
+        hint = 'سيتم استيراد درجاتك ونتائجك';
+      } else if (url.includes('Yazisma') || tab.title?.includes('Yazışma')) {
+        pageType = 'الرسائل - Yazışma Listesi';
+        icon = '📨';
+        hint = 'سيتم استيراد رسائلك';
+      } else {
+        hint = 'اذهب لإحدى الصفحات أدناه لاستيراد البيانات';
+      }
+
+      txt.textContent = `✅ AKSIS مفتوح | ${pageType}`;
+      btn.disabled = false;
+
+      scrapeContent.innerHTML = `
+        <div class="card">
+          <div class="card-title">${icon} ${pageType}</div>
+          <div style="font-size:11px;color:#938f99;margin-bottom:12px">${hint}</div>
+          <div style="font-size:11px;color:#cac4d0">
+            <strong style="color:#d0bcff">صفحات AKSIS:</strong>
+          </div>
+          <div style="margin-top:8px;display:flex;flex-direction:column;gap:6px">
+            <div onclick="openPage('DersProgrami')" style="padding:8px 10px;background:#2d2b33;border-radius:8px;cursor:pointer;font-size:11px;color:#cac4d0;border:1px solid rgba(202,196,208,0.06);display:flex;align-items:center;gap:8px">
+              <span>📅</span> Ders Programı <span style="margin-right:auto;color:#938f99;font-size:10px">الجدول</span>
+            </div>
+            <div onclick="openPage('SinavSonuclari')" style="padding:8px 10px;background:#2d2b33;border-radius:8px;cursor:pointer;font-size:11px;color:#cac4d0;border:1px solid rgba(202,196,208,0.06);display:flex;align-items:center;gap:8px">
+              <span>📊</span> Sınav Sonuçları <span style="margin-right:auto;color:#938f99;font-size:10px">الدرجات</span>
+            </div>
+            <div onclick="openPage('YazismaListesi')" style="padding:8px 10px;background:#2d2b33;border-radius:8px;cursor:pointer;font-size:11px;color:#cac4d0;border:1px solid rgba(202,196,208,0.06);display:flex;align-items:center;gap:8px">
+              <span>📨</span> Yazışma Listesi <span style="margin-right:auto;color:#938f99;font-size:10px">الرسائل</span>
+            </div>
+          </div>
+        </div>
+        <div class="data-chips">
+          <div class="chip ${savedData.schedule?.length ? 'has-data' : ''}">📅 ${savedData.schedule?.length || 0} درس</div>
+          <div class="chip ${savedData.grades?.length ? 'has-data' : ''}">📊 ${savedData.grades?.length || 0} نتيجة</div>
+          <div class="chip ${savedData.messages?.length ? 'has-data' : ''}">📨 ${savedData.messages?.length || 0} رسالة</div>
+        </div>
+      `;
+    } else {
+      dot.className = 'status-dot red';
+      txt.textContent = 'افتح AKSIS أولاً لتتمكن من الاستيراد';
+      btn.disabled = true;
+      scrapeContent.innerHTML = `
+        <div class="empty">
+          <div class="empty-icon">🔒</div>
+          <p>هذه الإضافة تعمل فقط على<br><strong>aksis.istanbul.edu.tr</strong><br><br>اضغط "فتح AKSIS" للبدء</p>
+        </div>
+      `;
+    }
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+// ===== استيراد البيانات =====
+async function doScrape() {
+  const btn = document.getElementById('btnScrape');
+  btn.disabled = true;
+  btn.innerHTML = '<div class="spinner" style="width:16px;height:16px;margin:0;border-width:2px"></div> جاري الاستيراد...';
+
+  try {
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    const results = await chrome.scripting.executeScript({
+      target: { tabId: tab.id },
+      func: scrapeCurrentPage
+    });
+
+    const data = results[0]?.result;
+    if (!data) throw new Error('لم يتم الحصول على بيانات');
+
+    // دمج مع البيانات المحفوظة
+    if (data.type === 'schedule' && data.items?.length) {
+      savedData.schedule = data.items;
+      showToast(`✅ تم استيراد ${data.items.length} درس!`);
+    } else if (data.type === 'grades' && data.items?.length) {
+      savedData.grades = data.items;
+      showToast(`✅ تم استيراد ${data.items.length} نتيجة!`);
+    } else if (data.type === 'messages' && data.items?.length) {
+      savedData.messages = data.items;
+      showToast(`✅ تم استيراد ${data.items.length} رسالة!`);
+    } else {
+      showToast('⚠️ لم يتم العثور على بيانات في هذه الصفحة', true);
+    }
+
+    // حفظ في storage
+    await chrome.storage.local.set({ aksisData: savedData });
+    renderDataTab();
+    checkCurrentPage();
+
+  } catch (e) {
+    showToast('❌ حدث خطأ: ' + e.message, true);
+  }
+
+  btn.disabled = false;
+  btn.innerHTML = '<span>🔄</span> استيراد من الصفحة الحالية';
+}
+
+// الدالة التي تُنفَّذ داخل صفحة AKSIS
+function scrapeCurrentPage() {
+  const url = window.location.href;
+  const bodyText = document.body?.innerText || '';
+
+  function getRows(selector) {
+    const rows = [];
+    document.querySelectorAll(selector).forEach(row => {
+      const cells = row.querySelectorAll('td');
+      if (cells.length >= 2) {
+        rows.push(Array.from(cells).map(c => c.innerText.trim()));
+      }
+    });
+    return rows;
+  }
+
+  // كشف نوع الصفحة
+  let type = 'unknown';
+  if (url.includes('DersProgrami') || bodyText.includes('Ders Programı') || bodyText.includes('Ders Saati')) type = 'schedule';
+  else if (url.includes('SinavSonuc') || bodyText.includes('Sınav Sonuç') || bodyText.includes('Not Ortalaması')) type = 'grades';
+  else if (url.includes('Yazisma') || bodyText.includes('Yazışma') || bodyText.includes('Mesaj')) type = 'messages';
+
+  const allRows = getRows('table tr');
+
+  if (type === 'schedule') {
+    const items = allRows
+      .filter(r => r.length >= 2 && r[0].length > 1)
+      .map(r => ({
+        name: r[0] || '',
+        day: r[1] || '',
+        time: r[2] || '',
+        room: r[3] || '',
+        doc: r[4] || ''
+      }))
+      .filter(r => r.name && !r.name.includes('Ders Adı') && !r.name.includes('Dersin'));
+    return { type, items };
+  }
+
+  if (type === 'grades') {
+    const items = allRows
+      .filter(r => r.length >= 2 && r[0].length > 1)
+      .map(r => ({
+        course: r[0] || '',
+        midterm: r[1] || '',
+        final: r[2] || '',
+        grade: r[3] || '',
+        status: r[4] || ''
+      }))
+      .filter(r => r.course && !r.course.includes('Ders'));
+    return { type, items };
+  }
+
+  if (type === 'messages') {
+    const items = allRows
+      .filter(r => r.length >= 2 && r[0].length > 1)
+      .map(r => ({
+        from: r[0] || '',
+        subject: r[1] || '',
+        date: r[2] || '',
+        preview: r[3] || ''
+      }))
+      .filter(r => r.from && !r.from.includes('Gönderen'));
+    return { type, items };
+  }
+
+  return { type: 'unknown', items: [] };
+}
+
+// ===== عرض تبويب البيانات =====
+function renderDataTab() {
+  const el = document.getElementById('data-content');
+  const total = (savedData.schedule?.length || 0) + (savedData.grades?.length || 0) + (savedData.messages?.length || 0);
+
+  if (!total) {
+    el.innerHTML = `<div class="empty"><div class="empty-icon">📭</div><p>لا توجد بيانات محفوظة بعد<br>اذهب لتبويب "استيراد" أولاً</p></div>`;
+    return;
+  }
+
+  let html = '';
+
+  // الجدول
+  if (savedData.schedule?.length) {
+    html += `<div class="card">
+      <div class="card-title">📅 الجدول الدراسي (${savedData.schedule.length})</div>`;
+    savedData.schedule.slice(0, 4).forEach(c => {
+      html += `<div class="card-item">
+        <div class="item-name">${c.name}</div>
+        <div class="item-sub">
+          ${c.day ? `<span>📆 ${c.day}</span>` : ''}
+          ${c.time ? `<span>🕐 ${c.time}</span>` : ''}
+          ${c.room ? `<span>🚪 ${c.room}</span>` : ''}
+        </div>
+      </div>`;
+    });
+    if (savedData.schedule.length > 4) html += `<div style="font-size:10px;color:#938f99;text-align:center;padding-top:4px">و ${savedData.schedule.length - 4} مواد أخرى...</div>`;
+    html += `</div>`;
+  }
+
+  // الدرجات
+  if (savedData.grades?.length) {
+    html += `<div class="card">
+      <div class="card-title">📊 النتائج (${savedData.grades.length})</div>`;
+    savedData.grades.slice(0, 3).forEach(g => {
+      const statusClass = g.status?.includes('Geç') ? 'badge-green' : g.status?.includes('Kal') ? 'badge-red' : 'badge-purple';
+      html += `<div class="card-item">
+        <div class="item-name">${g.course}</div>
+        <div class="item-sub">
+          ${g.midterm ? `<span>Vize: ${g.midterm}</span>` : ''}
+          ${g.final ? `<span>Final: ${g.final}</span>` : ''}
+          ${g.grade ? `<span class="badge ${statusClass}">${g.grade}</span>` : ''}
+        </div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // الرسائل
+  if (savedData.messages?.length) {
+    html += `<div class="card">
+      <div class="card-title">📨 الرسائل (${savedData.messages.length})</div>`;
+    savedData.messages.slice(0, 3).forEach(m => {
+      html += `<div class="card-item">
+        <div class="item-name">${m.subject || m.from}</div>
+        <div class="item-sub"><span>👤 ${m.from}</span>${m.date ? `<span>📅 ${m.date}</span>` : ''}</div>
+      </div>`;
+    });
+    html += `</div>`;
+  }
+
+  // زر النسخ
+  html += `
+    <button class="btn btn-primary" onclick="copyJSON()" style="margin-top:4px">
+      📋 نسخ البيانات JSON
+    </button>
+    <button class="btn btn-secondary" onclick="openApp()">
+      🚀 فتح تطبيق موادي
+    </button>
+  `;
+
+  el.innerHTML = html;
+}
+
+// ===== نسخ JSON =====
+async function copyJSON() {
+  const json = JSON.stringify(savedData, null, 2);
+  await navigator.clipboard.writeText(json);
+  showToast('✅ تم نسخ البيانات!');
+}
+
+// ===== فتح التطبيق =====
+function openApp() {
+  const url = settings.appUrl || 'https://your-app.netlify.app';
+  chrome.tabs.create({ url });
+}
+
+// ===== فتح AKSIS =====
+function openAksis() {
+  chrome.tabs.create({ url: 'https://aksis.istanbul.edu.tr/' });
+}
+
+// ===== فتح صفحة محددة =====
+function openPage(page) {
+  chrome.tabs.create({ url: `https://aksis.istanbul.edu.tr/Home/${page}` });
+}
+
+// ===== التبويبات =====
+function switchTab(tab) {
+  ['scrape', 'data', 'settings'].forEach(t => {
+    document.getElementById(`tab-${t}`).style.display = t === tab ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach((el, i) => {
+    el.classList.toggle('active', ['scrape', 'data', 'settings'][i] === tab);
+  });
+  if (tab === 'data') renderDataTab();
+  if (tab === 'scrape') checkCurrentPage();
+}
+
+// ===== حفظ الإعدادات =====
+async function saveSettings() {
+  settings.appUrl = document.getElementById('appUrl').value;
+  await chrome.storage.local.set({ aksisSettings: settings });
+  showToast('✅ تم حفظ الإعدادات!');
+}
+
+// ===== مسح البيانات =====
+async function clearAll() {
+  if (!confirm('هل تريد مسح جميع البيانات المحفوظة؟')) return;
+  savedData = { schedule: [], grades: [], messages: [] };
+  await chrome.storage.local.remove('aksisData');
+  renderDataTab();
+  showToast('🗑️ تم مسح البيانات');
+}
+
+// ===== Toast =====
+function showToast(msg, isError = false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.style.background = isError ? '#f2b8b5' : '#a8d5a2';
+  t.style.color = isError ? '#3d1f1f' : '#1a3d20';
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+init();
+</script>
+</body>
+</html>
